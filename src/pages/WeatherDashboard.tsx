@@ -1,12 +1,14 @@
 import { CurrentWeather } from '@/components/component/CurrentWeather'
+import FavoriteCities from '@/components/component/FavoriteCities'
 import HourlyTemp from '@/components/component/HourlyTemp'
 import LoadingSkeleton from '@/components/component/LoadingSkeleton'
+import WeatherDetails from '@/components/component/WeatherDetails'
+import WeatherForecast from '@/components/component/WeatherForecast'
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { useGeolocation } from '@/hooks/useGeolocation'
 import { useForecast, useReverseGeoCode, useWeather } from '@/hooks/useWeather'
 import { AlertTriangle, MapPin, RefreshCw } from 'lucide-react'
-import React from 'react'
 
 const WeatherDashboard = () => {
 
@@ -91,7 +93,7 @@ const WeatherDashboard = () => {
 
   return (
     <div className='space-y-4'>
-      {/* Favouritie cities */}
+      <FavoriteCities />
 
       <div className='flex items-center justify-between'>
         <h1 className='text-xl font-bold tracking-tight'>
@@ -111,10 +113,12 @@ const WeatherDashboard = () => {
 
         </div>
 
-        <div>
-
-          {/* details 
-          forecast */}
+        <div className='grid gap-4 md:grid-cols-2 items-start'>
+          <div>
+          <WeatherDetails data={weatherQuery.data}/>
+          </div>
+          {/*forecast */}
+          <WeatherForecast data={forecastQuery.data} />
 
         </div>
       </div>
